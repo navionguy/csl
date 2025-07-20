@@ -3,7 +3,8 @@ CREATE TABLE collections (
     collection_id uuid DEFAULT gen_random_uuid(),
     name VARCHAR NOT NULL,
     owner VARCHAR,
-    PRIMARY KEY (collection_id)
+    PRIMARY KEY (collection_id),
+    UNIQUE (name, owner)
 );
 
 CREATE INDEX collection ON collections (name);
@@ -19,7 +20,8 @@ CREATE TABLE books (
     description VARCHAR,
     genre VARCHAR,
     notes VARCHAR,
-    PRIMARY KEY (book_id)
+    PRIMARY KEY (book_id),
+    UNIQUE (collection, title, author)
 );
 
 CREATE INDEX genres ON books (genre);
