@@ -13,12 +13,12 @@ Below is an example of curl command to search for all collections with the name 
 
     curl --header "Content-Type: application/json" \
     --request POST \
-    --data '{"Name":"Computer Science","Owner":""}' \
+    --data '{"Name":"Computer Science"}' \
     http://localhost:8080/collection  
 
 ### Creating a new Collection
 
-The new collection must have name for the collection can have a named Owner.
+The new collection must have a name for the collection, Owner name is optional.
 Both of which should be strings.
 
 Below is an example of curl command to create a new collection.
@@ -33,7 +33,7 @@ If a collection with that name and owner already exists, the request will return
 ### Deleting an existing Collection  
 
 Deleting a collection requires the collection name and owner, if there is one.  
-Any books that are in the passed collection will have their entries deleted as well.  
+Any books that are in the collection will have their entries deleted as well.  
 
 Below is an example curl command to delete a collection.
 
@@ -42,7 +42,7 @@ Below is an example curl command to delete a collection.
     --data '{"Name":"Spy Novels","Owner":"Vince Flynn"}' \
     http://localhost:8080/collection
 
-If the no collection can be found with the parameters given, the request will return a status of ***StatusBadRequest***.  
+If no collection can be found with the parameters given, the request will return a status of ***StatusBadRequest***.  
 
 ### Modifying an exiting Collection
 
@@ -89,6 +89,8 @@ Below is an example curl command to add a book to a collection.
     "PublicationDate": "2017", "Notes": "English edition"}' \
     http://localhost:8080/books  
 
+If the requested book entry already exists, the request will fail with a status of ***SatusConflict**.
+
 ### Removing a book from a Collection or Collections
 
 To remove a book from a collection or from the entire library:  
@@ -115,6 +117,8 @@ Below is an example curl command to add a book to a collection.
     --data '{"CollectionName":"Historical Non-Fiction","CollectionOwner":"Don Hinds",\
     "Title": "Lee's Cavalrymen", "Author": "Edward G. Longacre"}\
     http://localhost:8080/books  
+
+If the search values do find a valid book entry, the request will return the status of ***StatusBadRequest***
 
 ### Modifying a book in the library
 
@@ -151,10 +155,11 @@ Below is an example curl command to modify a book in the library.
     "NewPubDate": "2014", "NewNotes": "German edition"}' \
     http://localhost:8080/books  
 
+If the values provided do not match to a single book entry, the request will return with the status ***StatusBadRequest***
 
 ### Search for a book in the Library
 
-All values are optional and can be expressed as regular expressions.   
+All values are optional and can be expressed as regular expressions.
 
 - CollectionName
 - CollectionOwner
@@ -171,4 +176,4 @@ Below is an example curl command to search for a book in the library.
     curl --header "Content-Type: application/json" \
     --request GET \
     --data '{"CollectionOwner":"Don Hinds","Title": "Emerson's Essays", "Author": "Ralph Waldo Emerson",\
-    "PublicationDate": "1841" http://localhost:8080/books  
+    "PublicationDate": "1841"} http://localhost:8080/books  
