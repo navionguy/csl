@@ -4,6 +4,12 @@ The Community Shared Library allows any group of people to maintain a catalog of
 
 ## Book Management
 
+### csl-find-book - Search for a book
+
+csl-find-book [-c *collection*] [-h *holder*] [-t *title*] [-a *author*] [-p *publish date*] [-e *edition*] [-d *description*] [-g *genre*] [-n *notes*]
+
+>All parameters all optional and can be expressed as regular expressions.
+
 ### csl-add-book - Add a book to a collection
 
 csl-add-book -c *collection* [-h *holder*] -t *title* -a *author* -p *publish date* [-e *edition*] [-d *description*] [-g *genre*] [-n *notes*]
